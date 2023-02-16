@@ -69,6 +69,24 @@ Node* deleteFirstNode(Node * head){
     return curr;
 }
 
+//To delete the last elemnt of linked_list
+Node* popLastElement(Node *head){
+    if(head==NULL){
+        return;
+    }
+    if(head->next==NULL){
+        delete(head);
+        return NULL;
+    }
+    Node* curr = head;
+    while(curr->next->next !=NULL){
+        curr = curr->next;
+    }
+    delete(curr->next);
+    curr->next = NULL;
+    return head;
+}
+
 // To print linked_list elements
 void printLl(Node *head){
     while(head!=NULL){
