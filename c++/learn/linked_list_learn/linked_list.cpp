@@ -21,25 +21,6 @@ int sizeOfLl(Node *head){
     return n;
 }
 
-
-// To insert element at a given position in linked_list
-Node* insertAfter(Node *head, int x,int pos){
-    Node *temp = NULL;
-    temp ->data = x;
-    if(pos==1){
-        temp ->next = head;
-        return temp;
-    }
-    if(pos>=sizeOfLl(head)+1){
-        cout << "Wrong position";
-        return head;
-    }
-    int n=0;
-    
-    
-    return head;
-}
-
 // To append elemetns in last of linked_list
 Node* append(Node *head, int x){
     Node* temp = new Node;
@@ -54,25 +35,55 @@ Node* append(Node *head, int x){
     curr ->next = temp;
     return head;
 }
+// To insert element at a given position in linked_list
+Node* insertAfter(Node *head, int x,int pos){
+    Node *temp = new Node;
+    temp ->data = x;
+    temp ->next = NULL;
+    if(head==NULL){
+        return temp;
+    }
+    if(pos==1){
+        temp ->next = head;
+        return temp;
+    }
+    int n = sizeOfLl(head);
+    if(pos>n+1){
+        cout << "Wrong positon specified\n";
+        return head;
+    }
+    if(pos==n){
+        return append(head,x);
+    }
+    int k = 1;
+    Node* curr = head;
+    while(k+1<pos){
+        curr = curr->next;
+        k++;
+    }
+    temp->next = curr->next;
+    curr->next = temp;
+    return head;
+}
 
 // To delete first_element of linked_list
 Node* deleteFirstNode(Node * head){
     if(head==NULL)
-        return;
+        return NULL;
     if(head->next==NULL){
         delete(head);
         return NULL;
     }
     Node * curr = head;
-    curr = curr ->next;
-    delete(head);
-    return curr;
+    head = head->next;
+    delete(curr);
+    return head;
 }
 
 //To delete the last elemnt of linked_list
 Node* popLastElement(Node *head){
     if(head==NULL){
-        return;
+        return NULL;
     }
     if(head->next==NULL){
         delete(head);
@@ -93,6 +104,7 @@ void printLl(Node *head){
         cout << head ->data << " ";
         head = head->next;
     }
+    cout << "\n";
 }
 
 // To reverse print the element of Linked_List
@@ -116,6 +128,11 @@ int main(){
         head = append(head,k);
     }
     printLl(head);
-    
+    head = deleteFirstNode(head);
+    printLl(head);
+    head = popLastElement(head);
+    printLl(head);
+    head =insertAfter(head,90,1);
+    printLl(head);
     return 0;
 }
