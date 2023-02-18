@@ -147,9 +147,25 @@ Node* reverse(Node*head){
     if(head==NULL)
         return NULL;
     Node* curr = head;
-    while(curr->next!=NULL){
-        
+    Node* prev = NULL;
+    while(curr!=NULL){
+        Node *next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
     }
+    return prev;
+}
+
+Node * recreverse(Node* head){
+    if(head==NULL || head->next==NULL){
+        return head;
+    }
+    Node *rest_head = recreverse( head->next );
+    Node *rest_tail = head->next;
+    rest_tail->next = head;
+    head->next = NULL;
+    return rest_head;
 }
 
 int main(){
@@ -168,10 +184,12 @@ int main(){
     if(mid!=NULL){
         cout << mid->data << " ";
     }*/ 
-    Node* res = nthElementFromEnd(head,3);
-    if(res!=NULL){
-        cout << res->data << " ";
-    }
+    // Node* res = nthElementFromEnd(head,3);
+    // if(res!=NULL){
+    //     cout << res->data << " ";
+    // }
+    head = recreverse(head);
+    printLl(head);
 
 
     /*head = deleteFirstNode(head);
