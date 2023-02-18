@@ -30,14 +30,17 @@ Node* appendatend(Node* head,int x){
     Node* temp = new Node(x);
     if(head==NULL){
         temp->next = temp;
+        temp->prev = temp;
         return temp;
     }
     Node * curr = head;
     while(curr->next!=head){
         curr = curr->next;
     }
+    temp->prev = curr;
     curr->next = temp;
     temp->next = head;
+    curr->prev = temp;
     return head;
 }
 
@@ -50,7 +53,7 @@ int main(){
     int k;
     for(int i=0;i<n;i++){
         cin >> k;
-        head = appendatend(head,k);
+        head = appendatend(head,k);                           
     }
     display(head);
     
