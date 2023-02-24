@@ -167,6 +167,32 @@ Node * recreverse(Node* head){
     head->next = NULL;
     return rest_head;
 }
+Node * removeDuplicate(Node* head){
+    if(head==NULL)
+        return NULL;
+    Node * curr = head;
+    Node * temp = NULL;
+    while(curr->next!=NULL){
+        if(curr->data == curr->next->data){
+            temp = curr->next;
+            curr->next = curr->next->next;
+            delete(temp);
+        }
+        else {
+            curr = curr ->next;
+        }
+    }
+    return head;
+}
+
+Node* reversek(Node*head,int k){
+    if(head==NULL)
+        return NULL;
+    if(k>sizeOfLl(head)){
+        reverse(head);
+    }
+    
+}
 
 int main(){
     Node *head = NULL;
@@ -180,6 +206,8 @@ int main(){
         head = append(head,k);
     }
     printLl(head);
+    // head =removeDuplicate(head);
+    printLl(head);
     /*Node *mid = middleElemnet(head);
     if(mid!=NULL){
         cout << mid->data << " ";
@@ -188,8 +216,8 @@ int main(){
     // if(res!=NULL){
     //     cout << res->data << " ";
     // }
-    head = recreverse(head);
-    printLl(head);
+    // head = recreverse(head);
+    // printLl(head);
 
 
     /*head = deleteFirstNode(head);
