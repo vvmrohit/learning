@@ -1,3 +1,3 @@
-import pandas
-print("Hello World")
+myFile = open("test.txt")
+myFile.read()
 
